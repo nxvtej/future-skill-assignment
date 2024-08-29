@@ -12,16 +12,7 @@ function App() {
 	const [cards, setCards] = useState([]);
 
 	useEffect(() => {
-		// Fetch data on component mount
-		axios
-			.get("http://localhost:3001/api/v1/cards/")
-			.then((response) => {
-				console.log("Response data:", response.data);
-				setCards(response.data); // `response.data` is the array of cards
-			})
-			.catch((error) => {
-				console.error("Error fetching data:", error);
-			});
+		onclickhandler();
 	}, []);
 
 	const onclickhandler = () => {
@@ -30,7 +21,7 @@ function App() {
 			.get("http://localhost:3001/api/v1/cards/")
 			.then((response) => {
 				console.log("Response data:", response.data);
-				setCards(response.data); // Update state with the new data
+				setCards(response.data.data); // Update state with the new data
 				console.log("Updated card data:", response.data); // Log the data after update
 			})
 			.catch((error) => {
@@ -58,11 +49,11 @@ function App() {
 			</header>
 
 			<main>
-				{console.log(cards.length)}
-				{console.log(cards.data.length)}
+				{/* {console.log(cards.length)}
+				{console.log(cards.data.length)} */}
 				<div className='flex flex-col items-center mt-28'>
 					<div className='grid grid-cols-2 gap-6 justify-center'>
-						{cards.length > 0 ? ( // Check if `cards` array is not empty
+						{
 							cards.map((card) => (
 								<div key={card._id} className='col-span-1'>
 									<Card
@@ -72,9 +63,9 @@ function App() {
 									/>
 								</div>
 							))
-						) : (
-							<p>No cards available</p>
-						)}
+							// ) : (
+							// <p>No cards available</p>
+						}
 					</div>
 				</div>
 			</main>
